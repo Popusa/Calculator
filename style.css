@@ -1,0 +1,17 @@
+body{
+    margin:0;
+    padding:0;
+}
+header,footer{
+    background-color:yellow;
+    color:blue;
+    padding:16px;
+    text-align:center;
+    }
+footer{
+        position:fixed;
+        left:0px;
+        bottom:0px;
+        max-height:10%;
+        width:100%;
+    }
