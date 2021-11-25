@@ -18,12 +18,12 @@ footer{
 .container{
     margin-left:auto;
     margin-right:auto;
-    margin-top:32px;
+    margin-top:90px;
     padding:48px;
     background-color: lightblue;
     border-style: solid;
     border-color: blue;
-    width:400px;
+    width:350px;
 }
 .display{
     margin-left:auto;
@@ -33,33 +33,31 @@ footer{
     border-style: solid;
     border-color:gray;
     background-color:white;
+    text-align:right;
 }
 .buttons{
     margin-left:auto;
     margin-right:auto;
     gap:4px;
-    width:100%;
 }
 .miscfunc{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
+    display:flex;
+}
+.miscfunc > button{
     width:100%;
 }
 .operators{
-    display:grid;
-    grid-template-rows:repeat(4,1fr);
-    width:100%;
-    gap: 2px;
-    height:auto;
+    display:flex;
+    flex-direction:column;
+    width:35%;
+    
 }
 .numbers{
     display:grid;
     grid-template-columns:repeat(3,1fr);
     grid-template-rows:repeat(3,1fr);
     width:100%;
-    height:auto;
 }
 .seperator{
     display:flex;
-    width:100%;
 }
