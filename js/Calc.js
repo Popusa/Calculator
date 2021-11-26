@@ -1,3 +1,4 @@
+const displayed = document.querySelector(".display");
 const CalcLogic = {
     OperandOne: 0,
     OperandTwo: 0,
@@ -36,3 +37,4 @@ const CalcLogic = {
         this.OperandTwo = 0;
     }
 };
+displayed.innerText = "0";

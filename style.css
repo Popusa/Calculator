@@ -34,29 +34,43 @@ footer{
     border-color:gray;
     background-color:white;
     text-align:right;
+    color:black;
 }
 .buttons{
     margin-left:auto;
     margin-right:auto;
     gap:4px;
 }
+button{
+    color:white;
+}
 .miscfunc{
     display:flex;
+    
 }
 .miscfunc > button{
     width:100%;
+    background-color:violet;
+    border-width:1px;
 }
 .operators{
     display:flex;
     flex-direction:column;
     width:35%;
-    
+}
+.operators > button{
+    background-color:red;
+    border-width:1px;
 }
 .numbers{
     display:grid;
     grid-template-columns:repeat(3,1fr);
     grid-template-rows:repeat(3,1fr);
     width:100%;
+}
+.numbers > button{
+    background-color:blue;
+    border-width:1px;
 }
 .seperator{
     display:flex;
