@@ -23,10 +23,10 @@ percentified.addEventListener('click',function(){
     return current / 100;
 });
 negativified.addEventListener('click',function(){
-    return -current;
+    return current * -1;
 });
 clearall.addEventListener('click',function(){
-//    displayed.innerText = "0";
+    displayed.innerText = "0";
     current = "";
     OperandOne = 0;
     OperandTwo = 0;
