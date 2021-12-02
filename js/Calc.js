@@ -18,58 +18,62 @@ const add = document.querySelector("#add");
 const subtract = document.querySelector("#subtract");
 const divide = document.querySelector("#multiply");
 const multiply = document.querySelector("#divide");
+let firsttime = false;
 const CalcLogic = {
     OperandOne: 0,
     OperandTwo: 0,
-    current:"0",
+    current:"",
     total: 0,
     Operator: '',
-    Operate:function(){
+    DoOperation:(function(){
 
-    },
-    UpdateDisplay:function(){
+    }),
+    UpdateDisplay:(function(){
         displayed.innerText = this.current;
-    },
-    AddOperands:function(){
+    }),
+    AddOperands:(function(){
         return this.OperandOne + this.OperandTwo;
-    },
-    SubtractOperands:function(){
-        return this.OperandONe - this.OperandTwo;
-    },
-    MultiplyOperands:function(){
+    }),
+    SubtractOperands:(function(){
+        return this.OperandOne - this.OperandTwo;
+    }),
+    MultiplyOperands:(function(){
         return this.OperandOne * this.OperandTwo;
-    },
-    DivideOperands:function(){
+    }),
+    DivideOperands:(function(){
         if (this.OperandTwo == 0)
             return "I ain't doing that...";
         else
             return this.OperandOne / this.OperandTwo;
-    },
-    DeleteCurrent:function(){
+    }),
+    DeleteCurrent:(function(){
         this.current[this.current.length - 1] = "";
         CalcLogic.UpdateDisplay();
-    }, 
-    GetPercent:function(){
+    }), 
+    GetPercent:(function(){
         this.current / 100;
         CalcLogic.UpdateDisplay();
-    },
-    SetNegative:function(){
+//       console.log("percentified");
+    }),
+    SetNegative:(function(){
         current = -this.current;
         CalcLogic.UpdateDisplay();
-    },
-    ClearEverything:function(){
+//        console.log("negativied!");
+    }),
+    ClearEverything:(function(){
+        displayed.innerText = "0";
         this.current = "";
         this.OperandOne = 0;
         this.OperandTwo = 0;
         this.total = 0;
         this.Operator = '';
-        CalcLogic.UpdateDisplay();
-    },
+//      console.log("function called successfully.");
+    }),
 };
 //EVENT LISTENER LOGIC
-percentified.addEventListener('click',CalcLogic.GetPercent());
-negativified.addEventListener('click',CalcLogic.SetNegative());
-clearall.addEventListener('click',CalcLogic.ClearEverything());
+percentified.addEventListener('click',function(){CalcLogic.GetPercent()});
+negativified.addEventListener('click',function(){CalcLogic.SetNegative()});
+clearall.addEventListener('click',function(){CalcLogic.ClearEverything()});
 zero.addEventListener('click',function(){
     CalcLogic.current += "0";
     CalcLogic.UpdateDisplay();
