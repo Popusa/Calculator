@@ -46,7 +46,6 @@ button{
 }
 .miscfunc{
     display:flex;
-    
 }
 .miscfunc > button{
     width:100%;
@@ -66,7 +65,7 @@ button{
     display:grid;
     grid-template-columns:repeat(3,1fr);
     grid-template-rows:repeat(3,1fr);
-    width:100%;
+    width:105%;
 }
 .numbers > button{
     background-color:blue;

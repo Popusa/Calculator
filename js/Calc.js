@@ -1,7 +1,9 @@
+//div elements
 const displayed = document.querySelector(".display");
 const percentified = document.querySelector("#percent");
 const negativified = document.querySelector("#negative");
 const clearall = document.querySelector("#clear");
+const makeitdecimal = document.querySelector("#decimal");
 const one = document.querySelector("#one");
 const two = document.querySelector("#two");
 const three = document.querySelector("#three");
@@ -18,8 +20,12 @@ const add = document.querySelector("#add");
 const subtract = document.querySelector("#subtract");
 const divide = document.querySelector("#multiply");
 const multiply = document.querySelector("#divide");
-let firsttime = false;
+//VARIABLES
+let decimaladded = false;
+//CALCLOGIC OBJECT
 const CalcLogic = {
+    UsingOP1: false,
+    UsingOP2: false,
     OperandOne: 0,
     OperandTwo: 0,
     current:"",
@@ -47,18 +53,33 @@ const CalcLogic = {
             return this.OperandOne / this.OperandTwo;
     }),
     DeleteCurrent:(function(){
-        this.current[this.current.length - 1] = "";
+        let currentlengthindex = this.current.length - 1;
+        if (currentlengthindex < 0)
+        return;
+        else if (currentlengthindex == 0){
+            this.current = "";
+            displayed.innerText = "0";
+        }
+        else{
+        if (this.current[currentlengthindex] == ".")
+            decimaladded = false;
+        this.current = this.current.slice(0, -1);
         CalcLogic.UpdateDisplay();
+        }
     }), 
     GetPercent:(function(){
-        this.current / 100;
+        let temp = Number(this.current);
+        temp /= 10;
+        this.current = temp;
         CalcLogic.UpdateDisplay();
-//       console.log("percentified");
+//      console.log("percentified");
     }),
     SetNegative:(function(){
-        current = -this.current;
+        let temp = Number(this.current);
+        temp *= -1
+        this.current = temp;
         CalcLogic.UpdateDisplay();
-//        console.log("negativied!");
+//      console.log("negativied!");
     }),
     ClearEverything:(function(){
         displayed.innerText = "0";
@@ -67,13 +88,25 @@ const CalcLogic = {
         this.OperandTwo = 0;
         this.total = 0;
         this.Operator = '';
+        decimaladded = false;
 //      console.log("function called successfully.");
+    }),
+    AddDecimal:(function(){
+        if (decimaladded || this.current == "")
+            return;
+        else{
+            this.current += ".";
+            decimaladded = true;
+            CalcLogic.UpdateDisplay();
+        }
     }),
 };
 //EVENT LISTENER LOGIC
+removeone.addEventListener('click',function(){CalcLogic.DeleteCurrent()});
 percentified.addEventListener('click',function(){CalcLogic.GetPercent()});
 negativified.addEventListener('click',function(){CalcLogic.SetNegative()});
 clearall.addEventListener('click',function(){CalcLogic.ClearEverything()});
+makeitdecimal.addEventListener('click',function(){CalcLogic.AddDecimal()});
 zero.addEventListener('click',function(){
     CalcLogic.current += "0";
     CalcLogic.UpdateDisplay();
