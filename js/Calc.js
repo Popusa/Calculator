@@ -20,22 +20,52 @@ const add = document.querySelector("#add");
 const subtract = document.querySelector("#subtract");
 const divide = document.querySelector("#multiply");
 const multiply = document.querySelector("#divide");
+//di si dx cx
+//rbp
+//rsp
+//edi esi edx ecx
 //VARIABLES
 let decimaladded = false;
 //CALCLOGIC OBJECT
 const CalcLogic = {
-    UsingOP1: false,
-    UsingOP2: false,
     OperandOne: 0,
     OperandTwo: 0,
     current:"",
     total: 0,
     Operator: '',
     DoOperation:(function(){
-
+        if (this.Operator == '')
+            return;
+        else{
+            this.OperandTwo = Number(this.current);
+            switch (this.Operator){
+                case '+':
+                    this.total = CalcLogic.AddOperands();
+                    break;
+                case '-':
+                    this.total = CalcLogic.SubtractOperands();
+                    break;
+                case '*':
+                    this.total = CalcLogic.MultiplyOperands();
+                    break;
+                case '/':
+                    this.total = CalcLogic.DivideOperands();
+                    break;
+            }
+            this.current = this.total;
+            CalcLogic.UpdateDisplay();
+        }
+        this.OperandOne = 0;
+        this.OperandTwo = 0;
+        this.Operator = '';
+        this.total = 0;
+        this.current = "";
     }),
     UpdateDisplay:(function(){
-        displayed.innerText = this.current;
+        if (this.current == "")
+            displayed.innerText = "0";
+        else
+            displayed.innerText = this.current;
     }),
     AddOperands:(function(){
         return this.OperandOne + this.OperandTwo;
@@ -147,4 +177,11 @@ nine.addEventListener('click',function(){
     CalcLogic.current += "9";    
     CalcLogic.UpdateDisplay();
 });
+add.addEventListener('click',function(){
+    CalcLogic.Operator = '+';
+    CalcLogic.OperandOne = Number(CalcLogic.current);
+    CalcLogic.current = "";
+//  CalcLogic.UpdateDisplay();
+});
+equal.addEventListener('click',function(){CalcLogic.DoOperation()});
 displayed.innerText = "0";
