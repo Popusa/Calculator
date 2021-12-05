@@ -18,14 +18,11 @@ const equal = document.querySelector("#equal");
 const removeone = document.querySelector("#delete");
 const add = document.querySelector("#add");
 const subtract = document.querySelector("#subtract");
-const divide = document.querySelector("#multiply");
-const multiply = document.querySelector("#divide");
-//di si dx cx
-//rbp
-//rsp
-//edi esi edx ecx
+const multiply = document.querySelector("#multiply");
+const divide = document.querySelector("#divide");
 //VARIABLES
 let decimaladded = false;
+let divbyzero  = false;
 //CALCLOGIC OBJECT
 const CalcLogic = {
     OperandOne: 0,
@@ -47,6 +44,9 @@ const CalcLogic = {
                     break;
                 case '*':
                     this.total = CalcLogic.MultiplyOperands();
+                    if (divbyzero)
+                        divbyzero = false;
+                        return;
                     break;
                 case '/':
                     this.total = CalcLogic.DivideOperands();
@@ -55,32 +55,15 @@ const CalcLogic = {
             this.current = this.total;
             CalcLogic.UpdateDisplay();
         }
-        this.OperandOne = 0;
+        this.OperandOne = this.total;
         this.OperandTwo = 0;
         this.Operator = '';
-        this.total = 0;
-        this.current = "";
     }),
     UpdateDisplay:(function(){
         if (this.current == "")
             displayed.innerText = "0";
         else
             displayed.innerText = this.current;
-    }),
-    AddOperands:(function(){
-        return this.OperandOne + this.OperandTwo;
-    }),
-    SubtractOperands:(function(){
-        return this.OperandOne - this.OperandTwo;
-    }),
-    MultiplyOperands:(function(){
-        return this.OperandOne * this.OperandTwo;
-    }),
-    DivideOperands:(function(){
-        if (this.OperandTwo == 0)
-            return "I ain't doing that...";
-        else
-            return this.OperandOne / this.OperandTwo;
     }),
     DeleteCurrent:(function(){
         let currentlengthindex = this.current.length - 1;
@@ -112,7 +95,8 @@ const CalcLogic = {
 //      console.log("negativied!");
     }),
     ClearEverything:(function(){
-        displayed.innerText = "0";
+        if (!divbyzero)
+            displayed.innerText = "0";
         this.current = "";
         this.OperandOne = 0;
         this.OperandTwo = 0;
@@ -130,7 +114,32 @@ const CalcLogic = {
             CalcLogic.UpdateDisplay();
         }
     }),
-};
+    CheckOperators:(function(){
+        if (this.Operator == '')
+            return true;
+        else
+            return false;
+    }),
+    AddOperands:(function(){
+        return this.OperandOne + this.OperandTwo;
+    }),
+    SubtractOperands:(function(){
+        return this.OperandOne - this.OperandTwo;
+    }),
+    MultiplyOperands:(function(){
+        return this.OperandOne * this.OperandTwo;
+    }),
+    DivideOperands:(function(){
+        if (this.OperandTwo == 0){
+            divbyzero = true;
+            displayed.innerText = "I ain't doing that...";
+            CalcLogic.ClearEverything();
+            return 0;
+        }
+        else
+            return this.OperandOne / this.OperandTwo;
+    }),
+}
 //EVENT LISTENER LOGIC
 removeone.addEventListener('click',function(){CalcLogic.DeleteCurrent()});
 percentified.addEventListener('click',function(){CalcLogic.GetPercent()});
@@ -178,10 +187,40 @@ nine.addEventListener('click',function(){
     CalcLogic.UpdateDisplay();
 });
 add.addEventListener('click',function(){
-    CalcLogic.Operator = '+';
-    CalcLogic.OperandOne = Number(CalcLogic.current);
+    if (CalcLogic.CheckOperators()){
+        CalcLogic.OperandOne = Number(CalcLogic.current);
+        CalcLogic.Operator = '+';
+    }
+    else
+        CalcLogic.DoOperation();
     CalcLogic.current = "";
-//  CalcLogic.UpdateDisplay();
+});
+subtract.addEventListener('click',function(){
+    if (CalcLogic.CheckOperators()){
+        CalcLogic.OperandOne = Number(CalcLogic.current);
+        CalcLogic.Operator = '-';
+    }
+    else
+        CalcLogic.DoOperation();
+    CalcLogic.current = "";
+});
+multiply.addEventListener('click',function(){
+    if (CalcLogic.CheckOperators()){
+        CalcLogic.OperandOne = Number(CalcLogic.current);
+        CalcLogic.Operator = '*';
+    }
+    else
+        CalcLogic.DoOperation();
+    CalcLogic.current = "";
+});
+divide.addEventListener('click',function(){
+    if (CalcLogic.CheckOperators()){
+        CalcLogic.OperandOne = Number(CalcLogic.current);
+        CalcLogic.Operator = '/';
+    }
+    else
+        CalcLogic.DoOperation();
+    CalcLogic.current = "";
 });
 equal.addEventListener('click',function(){CalcLogic.DoOperation()});
-displayed.innerText = "0";
+CalcLogic.UpdateDisplay();
