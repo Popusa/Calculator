@@ -25,7 +25,7 @@ let decimaladded = false;
 let divbyzero  = false;
 //CALCLOGIC OBJECT
 const CalcLogic = {
-    OperandOne: 0,
+    OperandOne: 1,
     OperandTwo: 0,
     current:"",
     total: 0,
@@ -44,13 +44,15 @@ const CalcLogic = {
                     break;
                 case '*':
                     this.total = CalcLogic.MultiplyOperands();
-                    if (divbyzero)
-                        divbyzero = false;
-                        return;
                     break;
                 case '/':
                     this.total = CalcLogic.DivideOperands();
-                    break;
+                    if (divbyzero){
+                        CalcLogic.ClearEverything();
+                        return;
+                    }
+                    else
+                        break;
             }
             this.current = this.total;
             CalcLogic.UpdateDisplay();
@@ -82,20 +84,20 @@ const CalcLogic = {
     }), 
     GetPercent:(function(){
         let temp = Number(this.current);
-        temp /= 10;
+        temp /= 100;
         this.current = temp;
         CalcLogic.UpdateDisplay();
 //      console.log("percentified");
     }),
     SetNegative:(function(){
-        let temp = Number(this.current);
-        temp *= -1
-        this.current = temp;
+        this.current = Number(this.current * -1);
         CalcLogic.UpdateDisplay();
 //      console.log("negativied!");
     }),
     ClearEverything:(function(){
-        if (!divbyzero)
+        if (divbyzero)
+            displayed.innerText = "I ain't doin that...";
+        else
             displayed.innerText = "0";
         this.current = "";
         this.OperandOne = 0;
@@ -103,6 +105,7 @@ const CalcLogic = {
         this.total = 0;
         this.Operator = '';
         decimaladded = false;
+        divbyzero = false;
 //      console.log("function called successfully.");
     }),
     AddDecimal:(function(){
@@ -113,12 +116,6 @@ const CalcLogic = {
             decimaladded = true;
             CalcLogic.UpdateDisplay();
         }
-    }),
-    CheckOperators:(function(){
-        if (this.Operator == '')
-            return true;
-        else
-            return false;
     }),
     AddOperands:(function(){
         return this.OperandOne + this.OperandTwo;
@@ -132,8 +129,6 @@ const CalcLogic = {
     DivideOperands:(function(){
         if (this.OperandTwo == 0){
             divbyzero = true;
-            displayed.innerText = "I ain't doing that...";
-            CalcLogic.ClearEverything();
             return 0;
         }
         else
@@ -187,16 +182,18 @@ nine.addEventListener('click',function(){
     CalcLogic.UpdateDisplay();
 });
 add.addEventListener('click',function(){
-    if (CalcLogic.CheckOperators()){
+    if (CalcLogic.Operator == ''){
         CalcLogic.OperandOne = Number(CalcLogic.current);
         CalcLogic.Operator = '+';
     }
-    else
+    else{
+        CalcLogic.OperandOne = CalcLogic.total;
         CalcLogic.DoOperation();
+    }
     CalcLogic.current = "";
 });
 subtract.addEventListener('click',function(){
-    if (CalcLogic.CheckOperators()){
+    if (CalcLogic.Operator == ''){
         CalcLogic.OperandOne = Number(CalcLogic.current);
         CalcLogic.Operator = '-';
     }
@@ -205,16 +202,15 @@ subtract.addEventListener('click',function(){
     CalcLogic.current = "";
 });
 multiply.addEventListener('click',function(){
-    if (CalcLogic.CheckOperators()){
+    if (CalcLogic.Operator == ''){
         CalcLogic.OperandOne = Number(CalcLogic.current);
         CalcLogic.Operator = '*';
     }
     else
         CalcLogic.DoOperation();
-    CalcLogic.current = "";
 });
 divide.addEventListener('click',function(){
-    if (CalcLogic.CheckOperators()){
+    if (CalcLogic.Operator == ''){
         CalcLogic.OperandOne = Number(CalcLogic.current);
         CalcLogic.Operator = '/';
     }
