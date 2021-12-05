@@ -1,9 +1,13 @@
+//Made by Daniel "Popusa" Youssef
+//Calculator app made with vanilla js and no regex or jquery
 //div elements
+//miscfunc
 const displayed = document.querySelector(".display");
 const percentified = document.querySelector("#percent");
 const negativified = document.querySelector("#negative");
 const clearall = document.querySelector("#clear");
 const makeitdecimal = document.querySelector("#decimal");
+//number pad
 const one = document.querySelector("#one");
 const two = document.querySelector("#two");
 const three = document.querySelector("#three");
@@ -15,7 +19,9 @@ const eight = document.querySelector("#eight");
 const nine = document.querySelector("#nine");
 const zero = document.querySelector("#zero");
 const equal = document.querySelector("#equal");
+//remove button
 const removeone = document.querySelector("#delete");
+//operations
 const add = document.querySelector("#add");
 const subtract = document.querySelector("#subtract");
 const multiply = document.querySelector("#multiply");
@@ -25,11 +31,15 @@ let decimaladded = false;
 let divbyzero  = false;
 //CALCLOGIC OBJECT
 const CalcLogic = {
+    //MEMBER VARIABLES
     OperandOne: 1,
     OperandTwo: 0,
     current:"",
     total: 0,
     Operator: '',
+    //METHODS
+    //DoOperation handles single or multiple operations at a time by taking the current as the second operand
+    //and evaluating operand one and operand two according to the current inputted operator
     DoOperation:(function(){
         if (this.Operator == '')
             return;
@@ -57,16 +67,20 @@ const CalcLogic = {
             this.current = this.total;
             CalcLogic.UpdateDisplay();
         }
+        //setting operand one to total allows multiple operations to take place without previous input being lost
+        //Operator is reset, awaiting next input from user, pressing "equal" in this case will not do anything as intended
         this.OperandOne = this.total;
         this.OperandTwo = 0;
         this.Operator = '';
     }),
+    //keeps a '0' in the display for user visibility and convienience. Also, it handles updating the displayed text to match the current input
     UpdateDisplay:(function(){
         if (this.current == "")
             displayed.innerText = "0";
         else
             displayed.innerText = this.current;
     }),
+    //Removes last inputted number. removing last inputted operator is done by choosing another operator
     DeleteCurrent:(function(){
         let currentlengthindex = this.current.length - 1;
         if (currentlengthindex < 0)
@@ -82,6 +96,7 @@ const CalcLogic = {
         CalcLogic.UpdateDisplay();
         }
     }), 
+    //divides by 100 to get the percentage of the value
     GetPercent:(function(){
         let temp = Number(this.current);
         temp /= 100;
@@ -89,6 +104,8 @@ const CalcLogic = {
         CalcLogic.UpdateDisplay();
 //      console.log("percentified");
     }),
+    //simply makes the current input a negative value
+    //I added an if statement to make sure display will not get updated needlessly if there is no current input and this button is pressed
     SetNegative:(function(){
         if (this.current == '')
             return;
@@ -98,6 +115,7 @@ const CalcLogic = {
         }
 //      console.log("negativied!");
     }),
+    //complete reset of all global, and member variables. Also, includes a part incase the user reset after dividing by zero.
     ClearEverything:(function(){
         if (divbyzero)
             displayed.innerText = "I ain't doin that...";
@@ -112,6 +130,7 @@ const CalcLogic = {
         divbyzero = false;
 //      console.log("function called successfully.");
     }),
+    //adds a floating point. variable keeps track of floating point inserted (even after deletion)
     AddDecimal:(function(){
         if (decimaladded || this.current == "")
             return;
@@ -121,6 +140,7 @@ const CalcLogic = {
             CalcLogic.UpdateDisplay();
         }
     }),
+    //operation functions
     AddOperands:(function(){
         return this.OperandOne + this.OperandTwo;
     }),
@@ -130,6 +150,7 @@ const CalcLogic = {
     MultiplyOperands:(function(){
         return this.OperandOne * this.OperandTwo;
     }),
+    //case for dividing by zero is covered
     DivideOperands:(function(){
         if (this.OperandTwo == 0){
             divbyzero = true;
@@ -140,11 +161,13 @@ const CalcLogic = {
     }),
 }
 //EVENT LISTENER LOGIC
+//misc func eventlisteners covered here using object methods
 removeone.addEventListener('click',function(){CalcLogic.DeleteCurrent()});
 percentified.addEventListener('click',function(){CalcLogic.GetPercent()});
 negativified.addEventListener('click',function(){CalcLogic.SetNegative()});
 clearall.addEventListener('click',function(){CalcLogic.ClearEverything()});
 makeitdecimal.addEventListener('click',function(){CalcLogic.AddDecimal()});
+//number pad event listeners. they all do the same thing except for the number inputted
 zero.addEventListener('click',function(){
     CalcLogic.current += "0";
     CalcLogic.UpdateDisplay();
@@ -185,6 +208,11 @@ nine.addEventListener('click',function(){
     CalcLogic.current += "9";    
     CalcLogic.UpdateDisplay();
 });
+//operations event listeners. The logic is the same for all of them except the operator input
+//first, the operator is checked if empty (for multiple operations purposes) and then
+//checked if there is a total (to make sure operandone gets total's value)
+//Operator will be added to member variable "operator" regardless since its corresponding button was pressed
+//current is set to "" to allow for operand two to be inputted
 add.addEventListener('click',function(){
     if (CalcLogic.Operator == ''){
         if (CalcLogic.total > 0)
@@ -249,5 +277,8 @@ divide.addEventListener('click',function(){
     }
     CalcLogic.current = "";
 });
+//event listener for equal button. simply calls DoOperation(). It does not need any special cases.
 equal.addEventListener('click',function(){CalcLogic.DoOperation()});
+//initial call of UpdateDisplay() to have the first "0" present.
 CalcLogic.UpdateDisplay();
+//Made by Daniel "Popusa" Youssef
