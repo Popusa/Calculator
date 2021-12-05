@@ -43,6 +43,7 @@ footer{
 }
 button{
     color:white;
+    padding:16px;
 }
 .miscfunc{
     display:flex;

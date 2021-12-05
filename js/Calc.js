@@ -183,39 +183,66 @@ nine.addEventListener('click',function(){
 });
 add.addEventListener('click',function(){
     if (CalcLogic.Operator == ''){
-        CalcLogic.OperandOne = Number(CalcLogic.current);
+        if (CalcLogic.total > 0)
+                CalcLogic.OperandOne = CalcLogic.total;
+            else
+                CalcLogic.OperandOne = Number(CalcLogic.current);
         CalcLogic.Operator = '+';
+        CalcLogic.UpdateDisplay();
     }
     else{
-        CalcLogic.OperandOne = CalcLogic.total;
+//        CalcLogic.OperandOne = CalcLogic.total;
         CalcLogic.DoOperation();
+        CalcLogic.Operator = '+';
     }
     CalcLogic.current = "";
 });
 subtract.addEventListener('click',function(){
     if (CalcLogic.Operator == ''){
-        CalcLogic.OperandOne = Number(CalcLogic.current);
+        if (CalcLogic.total > 0)
+                CalcLogic.OperandOne = CalcLogic.total;
+            else
+                CalcLogic.OperandOne = Number(CalcLogic.current);
+        CalcLogic.Operator = '-';
+        CalcLogic.UpdateDisplay();
+    }
+    else{
+//        CalcLogic.OperandOne = CalcLogic.total;
+        CalcLogic.DoOperation();
         CalcLogic.Operator = '-';
     }
-    else
-        CalcLogic.DoOperation();
     CalcLogic.current = "";
 });
 multiply.addEventListener('click',function(){
     if (CalcLogic.Operator == ''){
-        CalcLogic.OperandOne = Number(CalcLogic.current);
+        if (CalcLogic.total > 0)
+                CalcLogic.OperandOne = CalcLogic.total;
+            else
+                CalcLogic.OperandOne = Number(CalcLogic.current);
+        CalcLogic.Operator = '*';
+        CalcLogic.UpdateDisplay();
+    }
+    else{
+//        CalcLogic.OperandOne = CalcLogic.total;
+        CalcLogic.DoOperation();
         CalcLogic.Operator = '*';
     }
-    else
-        CalcLogic.DoOperation();
+    CalcLogic.current = "";
 });
 divide.addEventListener('click',function(){
     if (CalcLogic.Operator == ''){
-        CalcLogic.OperandOne = Number(CalcLogic.current);
+        if (CalcLogic.total > 0)
+                CalcLogic.OperandOne = CalcLogic.total;
+            else
+                CalcLogic.OperandOne = Number(CalcLogic.current);
+        CalcLogic.Operator = '/';
+        CalcLogic.UpdateDisplay();
+    }
+    else{
+//        CalcLogic.OperandOne = CalcLogic.total;
+        CalcLogic.DoOperation();
         CalcLogic.Operator = '/';
     }
-    else
-        CalcLogic.DoOperation();
     CalcLogic.current = "";
 });
 equal.addEventListener('click',function(){CalcLogic.DoOperation()});
