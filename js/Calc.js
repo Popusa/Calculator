@@ -90,8 +90,12 @@ const CalcLogic = {
 //      console.log("percentified");
     }),
     SetNegative:(function(){
-        this.current = Number(this.current * -1);
-        CalcLogic.UpdateDisplay();
+        if (this.current == '')
+            return;
+        else{
+            this.current = Number(this.current * -1);
+            CalcLogic.UpdateDisplay();
+        }
 //      console.log("negativied!");
     }),
     ClearEverything:(function(){
