@@ -100,6 +100,7 @@ const CalcLogic = {
     GetPercent:(function(){
         let temp = Number(this.current);
         temp /= 100;
+        temp = temp.toFixed(5);
         this.current = temp;
         CalcLogic.UpdateDisplay();
 //      console.log("percentified");
@@ -118,7 +119,7 @@ const CalcLogic = {
     //complete reset of all global, and member variables. Also, includes a part incase the user reset after dividing by zero.
     ClearEverything:(function(){
         if (divbyzero)
-            displayed.innerText = "I ain't doin that...";
+            displayed.innerText = "I ain't doin dat...";
         else
             displayed.innerText = "0";
         this.current = "";
@@ -142,12 +143,21 @@ const CalcLogic = {
     }),
     //operation functions
     AddOperands:(function(){
+        if ((this.OperandOne + this.OperandTwo) % 1 != 0)
+        return (this.OperandOne + this.OperandTwo).toFixed(5);
+    else
         return this.OperandOne + this.OperandTwo;
     }),
     SubtractOperands:(function(){
+        if ((this.OperandOne - this.OperandTwo) % 1 != 0)
+        return (this.OperandOne - this.OperandTwo).toFixed(5);
+    else
         return this.OperandOne - this.OperandTwo;
     }),
     MultiplyOperands:(function(){
+        if ((this.OperandOne * this.OperandTwo) % 1 != 0)
+        return (this.OperandOne * this.OperandTwo).toFixed(5);
+    else
         return this.OperandOne * this.OperandTwo;
     }),
     //case for dividing by zero is covered
@@ -156,8 +166,12 @@ const CalcLogic = {
             divbyzero = true;
             return 0;
         }
-        else
-            return this.OperandOne / this.OperandTwo;
+        else{
+            if (this.OperandOne % this.OperandTwo != 0)
+                return (this.OperandOne / this.OperandTwo).toFixed(5);
+            else
+                return this.OperandOne / this.OperandTwo;
+        }
     }),
 }
 //EVENT LISTENER LOGIC
