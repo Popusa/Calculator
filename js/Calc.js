@@ -8,6 +8,7 @@ const negativified = document.querySelector("#negative");
 const clearall = document.querySelector("#clear");
 const makeitdecimal = document.querySelector("#decimal");
 //number pad
+const numpad = document.querySelector(".numbers");
 const one = document.querySelector("#one");
 const two = document.querySelector("#two");
 const three = document.querySelector("#three");
@@ -182,46 +183,56 @@ negativified.addEventListener('click',function(){CalcLogic.SetNegative()});
 clearall.addEventListener('click',function(){CalcLogic.ClearEverything()});
 makeitdecimal.addEventListener('click',function(){CalcLogic.AddDecimal()});
 //number pad event listeners. they all do the same thing except for the number inputted
-zero.addEventListener('click',function(){
+function addzero(){
     CalcLogic.current += "0";
     CalcLogic.UpdateDisplay();
-});
-one.addEventListener('click',function(){
+}
+function addone(){
     CalcLogic.current += "1";    
     CalcLogic.UpdateDisplay();
-});
-two.addEventListener('click',function(){
+}
+function addtwo(){
     CalcLogic.current += "2";    
     CalcLogic.UpdateDisplay();
-});
-three.addEventListener('click',function(){
+}
+function addthree(){
     CalcLogic.current += "3";    
     CalcLogic.UpdateDisplay();
-});
-four.addEventListener('click',function(){
+}
+function addfour(){
     CalcLogic.current += "4";    
     CalcLogic.UpdateDisplay();
-});
-five.addEventListener('click',function(){
+}
+function addfive(){
     CalcLogic.current += "5";    
     CalcLogic.UpdateDisplay();
-});
-six.addEventListener('click',function(){
+}
+function addsix(){
     CalcLogic.current += "6";    
     CalcLogic.UpdateDisplay();
-});
-seven.addEventListener('click',function(){
+}
+function addseven(){
     CalcLogic.current += "7";    
     CalcLogic.UpdateDisplay();
-});
-eight.addEventListener('click',function(){
+}
+function addeight(){
     CalcLogic.current += "8";    
     CalcLogic.UpdateDisplay();
-});
-nine.addEventListener('click',function(){
+}
+function addnine(){
     CalcLogic.current += "9";    
     CalcLogic.UpdateDisplay();
-});
+}
+zero.addEventListener('click',function(){addzero()});
+one.addEventListener('click',function(){addone()});
+two.addEventListener('click',function(){addtwo()});
+three.addEventListener('click',function(){addthree()});
+four.addEventListener('click',function(){addfour()});
+five.addEventListener('click',function(){addfive()});
+six.addEventListener('click',function(){addsix()});
+seven.addEventListener('click',function(){addseven()});
+eight.addEventListener('click',function(){addeight()});
+nine.addEventListener('click',function(){addnine()});
 //operations event listeners. The logic is the same for all of them except the operator input
 //first, the operator is checked if empty (for multiple operations purposes) and then
 //checked if there is a total (to make sure operandone gets total's value)
