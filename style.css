@@ -4,8 +4,8 @@ body{
     background-color: black;
 }
 header,footer{
-    background-color:yellow;
-    color:blue;
+    background-color:rgba(255, 120, 0, 0.863);
+    color:white;
     padding:16px;
     text-align:center;
     }
@@ -81,3 +81,19 @@ button{
 .seperator{
     display:flex;
 }
+.footertext{
+    display:flex;
+    gap:8px;
+    justify-content:center;
+    flex-wrap: 1;
+}
+.githublogo:before {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px white;
+  }
+  
+.githublogo:hover {
+    color: white;
+    box-shadow: 0 0 5px white;
+    text-shadow: 0 0 5px white;
+  }
