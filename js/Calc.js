@@ -155,13 +155,13 @@ const CalcLogic = {
     }),
     SubtractOperands:(function(){
         if ((this.OperandOne - this.OperandTwo) % 1 != 0)
-        return (this.OperandOne - this.OperandTwo).toFixed(5);
+        return (Number(this.OperandOne) - Number(this.OperandTwo)).toFixed(5);
     else
         return this.OperandOne - this.OperandTwo;
     }),
     MultiplyOperands:(function(){
         if ((this.OperandOne * this.OperandTwo) % 1 != 0)
-        return (this.OperandOne * this.OperandTwo).toFixed(5);
+        return (Number(this.OperandOne) * Number(this.OperandTwo)).toFixed(5);
     else
         return this.OperandOne * this.OperandTwo;
     }),
@@ -173,7 +173,7 @@ const CalcLogic = {
         }
         else{
             if (this.OperandOne % this.OperandTwo != 0)
-                return (this.OperandOne / this.OperandTwo).toFixed(5);
+                return (Number(this.OperandOne) / Number(this.OperandTwo)).toFixed(5);
             else
                 return this.OperandOne / this.OperandTwo;
         }
