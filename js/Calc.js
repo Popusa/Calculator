@@ -130,6 +130,10 @@ const CalcLogic = {
         this.Operator = '';
         decimaladded = false;
         divbyzero = false;
+        add.style.backgroundColor = "rgba(255, 120, 0, 0.863)";
+        subtract.style.backgroundColor = "rgba(255, 120, 0, 0.863)";
+        multiply.style.backgroundColor = "rgba(255, 120, 0, 0.863)";
+        divide.style.backgroundColor = "rgba(255, 120, 0, 0.863)";
 //      console.log("function called successfully.");
     }),
     //adds a floating point. variable keeps track of floating point inserted (even after deletion)
@@ -145,7 +149,7 @@ const CalcLogic = {
     //operation functions
     AddOperands:(function(){
         if ((this.OperandOne + this.OperandTwo) % 1 != 0)
-        return (this.OperandOne + this.OperandTwo).toFixed(5);
+        return (Number(this.OperandOne) + Number(this.OperandTwo)).toFixed(5);
     else
         return this.OperandOne + this.OperandTwo;
     }),
@@ -184,44 +188,151 @@ clearall.addEventListener('click',function(){CalcLogic.ClearEverything()});
 makeitdecimal.addEventListener('click',function(){CalcLogic.AddDecimal()});
 //number pad event listeners. they all do the same thing except for the number inputted
 function addzero(){
+    if (CalcLogic.current.length == 15)
+        return;
     CalcLogic.current += "0";
     CalcLogic.UpdateDisplay();
 }
 function addone(){
+    if (CalcLogic.current.length == 15)
+        return;
     CalcLogic.current += "1";    
     CalcLogic.UpdateDisplay();
 }
 function addtwo(){
+    if (CalcLogic.current.length == 15)
+        return;
     CalcLogic.current += "2";    
     CalcLogic.UpdateDisplay();
 }
 function addthree(){
+    if (CalcLogic.current.length == 15)
+        return;
     CalcLogic.current += "3";    
     CalcLogic.UpdateDisplay();
 }
 function addfour(){
+    if (CalcLogic.current.length == 15)
+        return;
     CalcLogic.current += "4";    
     CalcLogic.UpdateDisplay();
 }
 function addfive(){
+    if (CalcLogic.current.length == 15)
+        return;
     CalcLogic.current += "5";    
     CalcLogic.UpdateDisplay();
 }
 function addsix(){
+    if (CalcLogic.current.length == 15)
+        return;
     CalcLogic.current += "6";    
     CalcLogic.UpdateDisplay();
 }
 function addseven(){
+    if (CalcLogic.current.length == 15)
+        return;
     CalcLogic.current += "7";    
     CalcLogic.UpdateDisplay();
 }
 function addeight(){
+    if (CalcLogic.current.length == 15)
+        return;
     CalcLogic.current += "8";    
     CalcLogic.UpdateDisplay();
 }
 function addnine(){
+    if (CalcLogic.current.length == 15)
+        return;
     CalcLogic.current += "9";    
     CalcLogic.UpdateDisplay();
+}
+function AppendAdditionOp(){
+    subtract.style.backgroundColor = "rgba(255, 120, 0, 0.863)";
+    multiply.style.backgroundColor = "rgba(255, 120, 0, 0.863)";
+    divide.style.backgroundColor = "rgba(255, 120, 0, 0.863)";
+    if (CalcLogic.Operator == ''){
+        if (CalcLogic.total > 0)
+                CalcLogic.OperandOne = CalcLogic.total;
+            else
+                CalcLogic.OperandOne = Number(CalcLogic.current);
+        CalcLogic.Operator = '+';
+        CalcLogic.UpdateDisplay();
+    }
+    else{
+//        CalcLogic.OperandOne = CalcLogic.total;
+        CalcLogic.DoOperation();
+        CalcLogic.Operator = '+';
+    }
+    CalcLogic.current = "";
+    add.style.backgroundColor = "Red";
+}
+function AppendSubtractionOp(){
+    add.style.backgroundColor = "rgba(255, 120, 0, 0.863)";
+    multiply.style.backgroundColor = "rgba(255, 120, 0, 0.863)";
+    divide.style.backgroundColor = "rgba(255, 120, 0, 0.863)";
+    if (CalcLogic.Operator == ''){
+        if (CalcLogic.total > 0)
+                CalcLogic.OperandOne = CalcLogic.total;
+            else
+                CalcLogic.OperandOne = Number(CalcLogic.current);
+        CalcLogic.Operator = '-';
+        CalcLogic.UpdateDisplay();
+    }
+    else{
+//        CalcLogic.OperandOne = CalcLogic.total;
+        CalcLogic.DoOperation();
+        CalcLogic.Operator = '-';
+    }
+    CalcLogic.current = "";
+    subtract.style.backgroundColor = "Red";
+}
+function AppendMultiplicationOp(){
+    subtract.style.backgroundColor = "rgba(255, 120, 0, 0.863)";
+    add.style.backgroundColor = "rgba(255, 120, 0, 0.863)";
+    divide.style.backgroundColor = "rgba(255, 120, 0, 0.863)";
+    if (CalcLogic.Operator == ''){
+        if (CalcLogic.total > 0)
+                CalcLogic.OperandOne = CalcLogic.total;
+            else
+                CalcLogic.OperandOne = Number(CalcLogic.current);
+        CalcLogic.Operator = '*';
+        CalcLogic.UpdateDisplay();
+    }
+    else{
+//        CalcLogic.OperandOne = CalcLogic.total;
+        CalcLogic.DoOperation();
+        CalcLogic.Operator = '*';
+    }
+    CalcLogic.current = "";
+    multiply.style.backgroundColor = "Red";
+}
+function AppendDivisionOp(){
+    subtract.style.backgroundColor = "rgba(255, 120, 0, 0.863)";
+    multiply.style.backgroundColor = "rgba(255, 120, 0, 0.863)";
+    add.style.backgroundColor = "rgba(255, 120, 0, 0.863)";
+    if (CalcLogic.Operator == ''){
+        if (CalcLogic.total > 0)
+                CalcLogic.OperandOne = CalcLogic.total;
+            else
+                CalcLogic.OperandOne = Number(CalcLogic.current);
+        CalcLogic.Operator = '/';
+        CalcLogic.UpdateDisplay();
+    }
+    else{
+//        CalcLogic.OperandOne = CalcLogic.total;
+        CalcLogic.DoOperation();
+        CalcLogic.Operator = '/';
+    }
+    CalcLogic.current = "";
+    divide.style.backgroundColor = "Red";
+}
+function EvalulateEquation(){
+    CalcLogic.DoOperation();
+    add.style.backgroundColor = "rgba(255, 120, 0, 0.863)";
+    subtract.style.backgroundColor = "rgba(255, 120, 0, 0.863)";
+    multiply.style.backgroundColor = "rgba(255, 120, 0, 0.863)";
+    divide.style.backgroundColor = "rgba(255, 120, 0, 0.863)";
 }
 zero.addEventListener('click',function(){addzero()});
 one.addEventListener('click',function(){addone()});
@@ -256,83 +367,30 @@ document.documentElement.addEventListener('keydown',function(e){
     addeight();
     else if (e.key == 9)
     addnine();
+    else if (e.key == '+')
+    AppendAdditionOp();
+    else if (e.key == '-')
+    AppendSubtractionOp();
+    else if (e.key == '*')
+    AppendMultiplicationOp();
+    else if (e.key == '/')
+    AppendDivisionOp();
+    else if (e.key == '=')
+    EvalulateEquation();
+    else if (e.key == '.')
+    CalcLogic.AddDecimal();
 });
 //operations event listeners. The logic is the same for all of them except the operator input
 //first, the operator is checked if empty (for multiple operations purposes) and then
 //checked if there is a total (to make sure operandone gets total's value)
 //Operator will be added to member variable "operator" regardless since its corresponding button was pressed
 //current is set to "" to allow for operand two to be inputted
-add.addEventListener('click',function(){
-    if (CalcLogic.Operator == ''){
-        if (CalcLogic.total > 0)
-                CalcLogic.OperandOne = CalcLogic.total;
-            else
-                CalcLogic.OperandOne = Number(CalcLogic.current);
-        CalcLogic.Operator = '+';
-        CalcLogic.UpdateDisplay();
-    }
-    else{
-//        CalcLogic.OperandOne = CalcLogic.total;
-        CalcLogic.DoOperation();
-        CalcLogic.Operator = '+';
-    }
-    CalcLogic.current = "";
-});
-subtract.addEventListener('click',function(){
-    if (CalcLogic.Operator == ''){
-        if (CalcLogic.total > 0)
-                CalcLogic.OperandOne = CalcLogic.total;
-            else
-                CalcLogic.OperandOne = Number(CalcLogic.current);
-        CalcLogic.Operator = '-';
-        CalcLogic.UpdateDisplay();
-    }
-    else{
-//        CalcLogic.OperandOne = CalcLogic.total;
-        CalcLogic.DoOperation();
-        CalcLogic.Operator = '-';
-    }
-    CalcLogic.current = "";
-});
-multiply.addEventListener('click',function(){
-    if (CalcLogic.Operator == ''){
-        if (CalcLogic.total > 0)
-                CalcLogic.OperandOne = CalcLogic.total;
-            else
-                CalcLogic.OperandOne = Number(CalcLogic.current);
-        CalcLogic.Operator = '*';
-        CalcLogic.UpdateDisplay();
-    }
-    else{
-//        CalcLogic.OperandOne = CalcLogic.total;
-        CalcLogic.DoOperation();
-        CalcLogic.Operator = '*';
-    }
-    CalcLogic.current = "";
-});
-divide.addEventListener('click',function(){
-    if (CalcLogic.Operator == ''){
-        if (CalcLogic.total > 0)
-                CalcLogic.OperandOne = CalcLogic.total;
-            else
-                CalcLogic.OperandOne = Number(CalcLogic.current);
-        CalcLogic.Operator = '/';
-        CalcLogic.UpdateDisplay();
-    }
-    else{
-//        CalcLogic.OperandOne = CalcLogic.total;
-        CalcLogic.DoOperation();
-        CalcLogic.Operator = '/';
-    }
-    CalcLogic.current = "";
-});
+add.addEventListener('click',function(){AppendAdditionOp()});
+subtract.addEventListener('click',function(){AppendSubtractionOp()});
+multiply.addEventListener('click',function(){AppendMultiplicationOp()});
+divide.addEventListener('click',function(){AppendDivisionOp()});
 //event listener for equal button. simply calls DoOperation(). It does not need any special cases.
-equal.addEventListener('click',function(){
-    CalcLogic.Operator = '=';
-    CalcLogic.DoOperation();
-    if (CalcLogic.total > 0 && CalcLogic.Operator == '')
-        CalcLogic.current = "";
-});
+equal.addEventListener('click',function(){EvalulateEquation()});
 //initial call of UpdateDisplay() to have the first "0" present.
 CalcLogic.UpdateDisplay();
 //Made by Daniel "Popusa" Youssef
