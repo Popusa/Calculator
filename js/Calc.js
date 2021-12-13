@@ -117,7 +117,7 @@ const CalcLogic = {
         }
 //      console.log("negativied!");
     }),
-    //complete reset of all global, and member variables. Also, includes a part incase the user reset after dividing by zero.
+    //complete reset of all global, and member variables. Also, handles an edge case where the user resets after dividing by zero.
     ClearEverything:(function(){
         if (divbyzero)
             displayed.innerText = "I ain't doin dat...";
@@ -233,6 +233,30 @@ six.addEventListener('click',function(){addsix()});
 seven.addEventListener('click',function(){addseven()});
 eight.addEventListener('click',function(){addeight()});
 nine.addEventListener('click',function(){addnine()});
+
+//these had to be done in if else statements because switch statements do not work for some reason...
+document.documentElement.addEventListener('keydown',function(e){
+    if (e.key == 0)
+    addzero();
+    else if (e.key == 1)
+    addone();
+    else if (e.key == 2)
+    addtwo();
+    else if (e.key == 3)
+    addthree();
+    else if (e.key == 4)
+    addfour();
+    else if (e.key == 5)
+    addfive();
+    else if (e.key == 6)
+    addsix();
+    else if (e.key == 7)
+    addseven();
+    else if (e.key == 8)
+    addeight();
+    else if (e.key == 9)
+    addnine();
+});
 //operations event listeners. The logic is the same for all of them except the operator input
 //first, the operator is checked if empty (for multiple operations purposes) and then
 //checked if there is a total (to make sure operandone gets total's value)
@@ -303,7 +327,12 @@ divide.addEventListener('click',function(){
     CalcLogic.current = "";
 });
 //event listener for equal button. simply calls DoOperation(). It does not need any special cases.
-equal.addEventListener('click',function(){CalcLogic.DoOperation()});
+equal.addEventListener('click',function(){
+    CalcLogic.Operator = '=';
+    CalcLogic.DoOperation();
+    if (CalcLogic.total > 0 && CalcLogic.Operator == '')
+        CalcLogic.current = "";
+});
 //initial call of UpdateDisplay() to have the first "0" present.
 CalcLogic.UpdateDisplay();
 //Made by Daniel "Popusa" Youssef
