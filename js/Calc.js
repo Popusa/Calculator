@@ -379,6 +379,10 @@ document.documentElement.addEventListener('keydown',function(e){
     EvalulateEquation();
     else if (e.key == '.')
     CalcLogic.AddDecimal();
+    else if (e.key == "Backspace")
+    CalcLogic.DeleteCurrent();
+    else if (e.key == 'c' || e.key == 'C')
+    CalcLogic.ClearEverything();
 });
 //operations event listeners. The logic is the same for all of them except the operator input
 //first, the operator is checked if empty (for multiple operations purposes) and then
