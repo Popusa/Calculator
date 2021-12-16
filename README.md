@@ -6,6 +6,14 @@ I wrote comments documenting every step I took while making it. While the code m
 
 I also went out of my way to learn new concepts that weren't covered during The Odin Project's cirriculum to implement certain features like the algorithm for chaining multiple operations using a data structure called the "stack", or seperating functions to have two eventlisteners, one for clicking and the other for keyboard support.
 
+Some quick notes about the Calculator:
+
+* Pressing 'c' will call the "ClearEverything" function.
+* The github link opens the link in a new tab.
+* Pressing "Equal" does not reset the Calculator for completely new numbers, you have to clear it yourself. This is done to allow doing multiple operations to be much simpler.
+
 The link for the released page is: https://popusa.github.io/Calculator/
 
-Here's to more with the Full Stack Javascript Section!
+That's all I have to say about the project. If you encounter any bugs or want to inquire about the project or any other projects I have worked on, you can contact me at this email: danielmaged.3@hotmail.com
+
+Thank you for taking the time to check this project out. Here's to more with the Full Stack Javascript Section!
