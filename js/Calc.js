@@ -138,8 +138,13 @@ const CalcLogic = {
     }),
     //adds a floating point. variable keeps track of floating point inserted (even after deletion)
     AddDecimal:(function(){
-        if (decimaladded || this.current == "")
+        if (decimaladded)
             return;
+        else if (this.current == ""){
+        this.current += "0.";
+        decimaladded = true;
+        CalcLogic.UpdateDisplay();
+        }
         else{
             this.current += ".";
             decimaladded = true;
