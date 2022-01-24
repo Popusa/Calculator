@@ -253,6 +253,7 @@ function addnine(){
     CalcLogic.UpdateDisplay();
 }
 function AppendAdditionOp(){
+    decimaladded = false;
     subtract.style.backgroundColor = "rgba(255, 120, 0, 0.863)";
     multiply.style.backgroundColor = "rgba(255, 120, 0, 0.863)";
     divide.style.backgroundColor = "rgba(255, 120, 0, 0.863)";
@@ -273,6 +274,7 @@ function AppendAdditionOp(){
     add.style.backgroundColor = "Red";
 }
 function AppendSubtractionOp(){
+    decimaladded = false;
     add.style.backgroundColor = "rgba(255, 120, 0, 0.863)";
     multiply.style.backgroundColor = "rgba(255, 120, 0, 0.863)";
     divide.style.backgroundColor = "rgba(255, 120, 0, 0.863)";
@@ -293,6 +295,7 @@ function AppendSubtractionOp(){
     subtract.style.backgroundColor = "Red";
 }
 function AppendMultiplicationOp(){
+    decimaladded = false;
     subtract.style.backgroundColor = "rgba(255, 120, 0, 0.863)";
     add.style.backgroundColor = "rgba(255, 120, 0, 0.863)";
     divide.style.backgroundColor = "rgba(255, 120, 0, 0.863)";
@@ -313,6 +316,7 @@ function AppendMultiplicationOp(){
     multiply.style.backgroundColor = "Red";
 }
 function AppendDivisionOp(){
+    decimaladded = false;
     subtract.style.backgroundColor = "rgba(255, 120, 0, 0.863)";
     multiply.style.backgroundColor = "rgba(255, 120, 0, 0.863)";
     add.style.backgroundColor = "rgba(255, 120, 0, 0.863)";
@@ -334,6 +338,8 @@ function AppendDivisionOp(){
 }
 function EvalulateEquation(){
     CalcLogic.DoOperation();
+//    CalcLogic.current = "";
+//    CalcLogic.total = 0;
     add.style.backgroundColor = "rgba(255, 120, 0, 0.863)";
     subtract.style.backgroundColor = "rgba(255, 120, 0, 0.863)";
     multiply.style.backgroundColor = "rgba(255, 120, 0, 0.863)";
