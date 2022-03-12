@@ -12,7 +12,7 @@ Some quick notes about the Calculator:
 * The github image link opens the link in a new tab so you will not lose the current page you are on.
 * Pressing "Equal" does not reset the Calculator for completely new numbers, you have to clear it yourself. This is done to allow doing multiple operations to be much simpler.
 
-The link for the released page is: https://popusa.github.io/Calculator/
+The link for the released page is: https://popusa.github.io/calculator/
 
 That's all I have to say about the project. If you encounter any bugs or want to inquire about the project or any other projects I have worked on, you can contact me at this email: danielmaged.3@hotmail.com
 
