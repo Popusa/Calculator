@@ -386,7 +386,7 @@ document.documentElement.addEventListener('keydown',function(e){
     AppendMultiplicationOp();
     else if (e.key == '/')
     AppendDivisionOp();
-    else if (e.key == '=')
+    else if (e.key == '=' || e.key == 'Enter')
     EvalulateEquation();
     else if (e.key == '.')
     CalcLogic.AddDecimal();
@@ -394,6 +394,8 @@ document.documentElement.addEventListener('keydown',function(e){
     CalcLogic.DeleteCurrent();
     else if (e.key == 'c' || e.key == 'C')
     CalcLogic.ClearEverything();
+    else if (e.key == 'n' || e.key == 'N')
+    CalcLogic.SetNegative();
 });
 //operations event listeners. The logic is the same for all of them except the operator input
 //first, the operator is checked if empty (for multiple operations purposes) and then
